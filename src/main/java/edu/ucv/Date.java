@@ -32,13 +32,13 @@ public class Date {
     }
 
     private int getDaysOfMonth() {
-        if(ifLongMonth(month))
+        if(ifLongMonth())
             return 31;
-        if(ifShortMonth(month))
+        if(ifShortMonth())
             return 30;
-        if(ifFebruary(month) && ifLeapYear())
+        if(ifFebruary() && ifLeapYear())
             return 29;
-        if(ifFebruary(month) && !ifLeapYear())
+        if(ifFebruary() && !ifLeapYear())
             return 28;
         return 0;
     }
@@ -48,17 +48,17 @@ public class Date {
                 ((year % 4 == 0) && (year % 100 != 0));
     }
 
-    private boolean ifLongMonth(int month) {
+    private boolean ifLongMonth() {
         List<Integer> LONG_MONTH = Arrays.asList( 1,3,5,7,8,10,12 );
         return LONG_MONTH.contains(month);
     }
 
-    private boolean ifShortMonth(int month) {
+    private boolean ifShortMonth() {
         List<Integer> SHORT_MONTH = Arrays.asList(4,6,9,11);
         return SHORT_MONTH.contains(month);
     }
 
-    private boolean ifFebruary(int month) {
+    private boolean ifFebruary() {
         return (month == 2);
     }
 
