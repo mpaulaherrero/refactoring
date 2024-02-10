@@ -32,17 +32,15 @@ public class Date {
     }
 
     private int getDaysOfMonth() {
-        int daysOfMonth = 0;
-        if(ifLongMonth(month)) {
-            daysOfMonth = 31;
-        } else if(ifShortMonth(month)) {
-            daysOfMonth = 30;
-        } else if(ifFebruary(month) && ifLeapYear()) {
-            daysOfMonth = 29;
-        } else if(ifFebruary(month) && !ifLeapYear()){
-            daysOfMonth = 28;
-        }
-        return daysOfMonth;
+        if(ifLongMonth(month))
+            return 31;
+        if(ifShortMonth(month))
+            return 30;
+        if(ifFebruary(month) && ifLeapYear())
+            return 29;
+        if(ifFebruary(month) && !ifLeapYear())
+            return 28;
+        return 0;
     }
 
     private boolean ifLeapYear() {
