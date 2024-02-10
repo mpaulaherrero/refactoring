@@ -1,5 +1,8 @@
 package edu.ucv;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Date {
 
     private int day;
@@ -30,28 +33,14 @@ public class Date {
 
     private int getDaysOfMonth() {
         int daysOfMonth = 0;
-        switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                daysOfMonth = 31;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                daysOfMonth = 30;
-                break;
-            case 2:
-                if (ifLeapYear())
-                    daysOfMonth = 29;
-                else
-                    daysOfMonth = 28;
-                break;
+        if(ifLongMonth(month)) {
+            daysOfMonth = 31;
+        } else if(ifShortMonth(month)) {
+            daysOfMonth = 30;
+        } else if(ifFebruary(month) && ifLeapYear()) {
+            daysOfMonth = 29;
+        } else if(ifFebruary(month) && !ifLeapYear()){
+            daysOfMonth = 28;
         }
         return daysOfMonth;
     }
@@ -59,6 +48,20 @@ public class Date {
     private boolean ifLeapYear() {
         return (year % 400 == 0) ||
                 ((year % 4 == 0) && (year % 100 != 0));
+    }
+
+    private boolean ifLongMonth(int month) {
+        List<Integer> LONG_MONTH = Arrays.asList( 1,3,5,7,8,10,12 );
+        return LONG_MONTH.contains(month);
+    }
+
+    private boolean ifShortMonth(int month) {
+        List<Integer> SHORT_MONTH = Arrays.asList(4,6,9,11);
+        return SHORT_MONTH.contains(month);
+    }
+
+    private boolean ifFebruary(int month) {
+        return (month == 2);
     }
 
 }
