@@ -20,10 +20,8 @@ public class Date {
         if (month < 1 || month > 12){
             return false;
         }
-
-        int daysOfMonth = getDaysOfMonth();
-
-        if(day > daysOfMonth){
+        
+        if(day > getDaysOfMonth()){
             return false;
         } else {
             return true;
