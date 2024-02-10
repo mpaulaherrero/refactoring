@@ -20,7 +20,7 @@ public class Date {
         if (month < 1 || month > 12){
             return false;
         }
-        
+
         if(day > getDaysOfMonth()){
             return false;
         } else {
@@ -47,14 +47,18 @@ public class Date {
                 daysOfMonth = 30;
                 break;
             case 2:
-                if ((year % 400 == 0) ||
-                        ((year % 4 == 0) && (year % 100 != 0)))
+                if (ifLeapYear())
                     daysOfMonth = 29;
                 else
                     daysOfMonth = 28;
                 break;
         }
         return daysOfMonth;
+    }
+
+    private boolean ifLeapYear() {
+        return (year % 400 == 0) ||
+                ((year % 4 == 0) && (year % 100 != 0));
     }
 
 }
