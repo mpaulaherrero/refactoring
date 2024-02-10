@@ -17,18 +17,13 @@ public class Date {
     }
 
     public boolean validate() {
-        if (day < 1 || day > 31){
+        if (day < 1 || day > getDaysOfMonth()){
             return false;
         }
         if (month < 1 || month > 12){
             return false;
         }
-
-        if(day > getDaysOfMonth()){
-            return false;
-        } else {
-            return true;
-        }
+        return true;
     }
 
     private int getDaysOfMonth() {
