@@ -2,8 +2,8 @@ package edu.ucv;
 
 public class Interval {
 
-	private FromEndPoint fromEndPoint; 
-	
+	private FromEndPoint fromEndPoint;
+
 	private UntilEndPoint untilEndPoint;
 
 	public Interval(FromEndPoint fromEndPoint, UntilEndPoint untilEndPoint) {
@@ -21,7 +21,8 @@ public class Interval {
 	}
 
 	public boolean includes(double value) {
-		return this.fromEndPoint.onLeft(value) && this.untilEndPoint.onRight(value);
+		//return this.includes(new IntervalBuilder().closed(value).closed(value).build());
+		return this.includes(new Interval(new FromIncludedEndPoint(value), new UntilIncludedEndPoint(value)));
 	}
 
 	public boolean includes(Interval that) {

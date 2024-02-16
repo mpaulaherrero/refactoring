@@ -7,12 +7,8 @@ class FromEndPoint extends EndPoint {
 		this.mode = new Open();
 	}
 
-	boolean onLeft(double value) {
-		return this.getValue() < value;
-	}
-
 	boolean onLeft(FromEndPoint that) {
-		if (this.onLeft(that.getValue())) {
+		if (this.getValue() < that.getValue()) {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {

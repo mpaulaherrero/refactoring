@@ -7,8 +7,4 @@ class UntilIncludedEndPoint extends UntilEndPoint {
 		this.mode = new Closed();
 	}
 
-	boolean onRight(double value) {
-		return super.onRight(value) || value == this.getValue();
-	}
-
 }

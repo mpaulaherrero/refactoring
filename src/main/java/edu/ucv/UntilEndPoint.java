@@ -7,12 +7,8 @@ class UntilEndPoint extends EndPoint {
 		this.mode = new Open();
 	}
 
-	boolean onRight(double value) {
-		return value < this.getValue();
-	}
-
 	boolean onRight(UntilEndPoint that) {
-		if (this.onRight(that.getValue())) {
+		if (this.getValue() > that.getValue()) {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {
