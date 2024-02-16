@@ -4,14 +4,11 @@ public class FromNegativeInfinity implements From {
 
 	@Override
 	public boolean onLeft(From that) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void shift(double value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

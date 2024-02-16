@@ -18,5 +18,11 @@ public class App
             new FromEndPoint(4.4,new Closed()),
             new UntilEndPoint(5.6, new Closed()));
         System.out.println( "interval length: " + interval.length());
+
+        Interval intervalInfinity = new Interval(
+            new FromNegativeInfinity(),
+            new UntilEndPoint(5, new Closed()));
+
+        System.out.println( "intervalInfinity include Double.MIN_VALUE: " + intervalInfinity.includes(Double.MIN_VALUE));
     }
 }

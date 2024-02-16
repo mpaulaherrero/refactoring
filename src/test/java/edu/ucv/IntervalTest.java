@@ -17,15 +17,17 @@ public class IntervalTest {
 		assertTrue(interval.includes(4.4 + 4.9));
 		assertFalse(interval.includes(5.6 + 4.9));
 		assertEquals(interval.length(), 1.2, PRECISION);
+		interval = new IntervalBuilder().infinity().closed(5).build();
+		assertTrue(interval.includes(Double.MIN_VALUE));
+		assertTrue(interval.includes(5));
+		assertFalse(interval.includes(5 + PRECISION));
 	}
 
 	@Test
 	public void lengthTest() {
 		Interval interval = new IntervalBuilder().closed(-4.4).open(5.6).build();
 		assertEquals(interval.length(), 10, PRECISION);
-		interval = new IntervalBuilder().infinity().open(5).build();
-		assertEquals(interval.length(), Double.POSITIVE_INFINITY, PRECISION);
-		interval = new IntervalBuilder().infinity().closed(5).build();
+		interval = new IntervalBuilder().infinity().open(5.6).build();
 		assertEquals(interval.length(), Double.POSITIVE_INFINITY, PRECISION);
 	}
 
