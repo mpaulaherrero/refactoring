@@ -2,47 +2,45 @@ package edu.ucv;
 
 public class Interval {
 
-	private double minimum;
-
-	private boolean minimumClosed;
-
-	private double maximum;
-
-	private boolean maximumClosed;
+	private FromEndPoint fromEndPoint;
+	
+	private UntilEndPoint untilEndPoint;
 
 	public Interval(double minimum, boolean minimumClosed, double maximum, boolean maximumClosed) {
 		assert minimum < maximum || minimum == maximum && minimumClosed || !minimumClosed;
-		this.minimum = minimum;
-		this.minimumClosed = minimumClosed;
-		this.maximum = maximum;
-		this.maximumClosed = maximumClosed;
+		this.fromEndPoint = new FromEndPoint();
+		this.fromEndPoint.minimum = minimum;
+		this.fromEndPoint.minimumClosed = minimumClosed;
+		this.untilEndPoint = new UntilEndPoint();
+		this.untilEndPoint.maximum = maximum;
+		this.untilEndPoint.maximumClosed = maximumClosed;
 	}
 
 	public void shift(double value) {
-		this.minimum += value;
-		this.maximum += value;
+		this.fromEndPoint.minimum += value;
+		this.untilEndPoint.maximum += value;
 	}
 
 	public double length() {
-		return this.maximum - this.minimum;
+		return this.untilEndPoint.maximum - this.fromEndPoint.minimum;
 	}
 
 	public boolean includes(double value) {
-		if (this.minimumClosed) {
-			if (value < this.minimum) {
+		if (this.fromEndPoint.minimumClosed) {
+			if (value < this.fromEndPoint.minimum) {
 				return false;
 			}
 		} else {
-			if (value <= this.minimum) {
+			if (value <= this.fromEndPoint.minimum) {
 				return false;
 			}
 		}
-		if (this.maximumClosed) {
-			if (value > this.maximum) {
+		if (this.untilEndPoint.maximumClosed) {
+			if (value > this.untilEndPoint.maximum) {
 				return false;
 			}
 		} else {
-			if (value >= this.maximum) {
+			if (value >= this.untilEndPoint.maximum) {
 				return false;
 			}
 		}
@@ -50,21 +48,21 @@ public class Interval {
 	}
 
 	public boolean includes(Interval that) {
-		if (this.minimum > that.minimum) {
+		if (this.fromEndPoint.minimum > that.fromEndPoint.minimum) {
 			return false;
 		}
-		if (this.minimumClosed) {
+		if (this.fromEndPoint.minimumClosed) {
 		} else {
-			if (this.minimum == that.minimum && that.minimumClosed) {
+			if (this.fromEndPoint.minimum == that.fromEndPoint.minimum && that.fromEndPoint.minimumClosed) {
 				return false;
 			}
 		}
-		if (this.maximum < that.maximum) {
+		if (this.untilEndPoint.maximum < that.untilEndPoint.maximum) {
 			return false;
 		}
-		if (this.maximumClosed) {
+		if (this.untilEndPoint.maximumClosed) {
 		} else {
-			if (this.maximum == that.maximum && that.maximumClosed) {
+			if (this.untilEndPoint.maximum == that.untilEndPoint.maximum && that.untilEndPoint.maximumClosed) {
 				return false;
 			}
 		}
