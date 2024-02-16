@@ -14,7 +14,9 @@ public class App
             System.out.println( "Fecha invalida" );
         }
 
-        Interval interval = new Interval(new FromIncludedEndPoint(4.4), new UntilEndPoint(5.6));
+        Interval interval = new Interval(
+            new FromIncludedEndPoint(4.4,new Closed()),
+            new UntilEndPoint(5.6, new Closed()));
         System.out.println( "interval length: " + interval.length());
     }
 }

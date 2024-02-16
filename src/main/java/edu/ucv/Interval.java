@@ -22,11 +22,15 @@ public class Interval {
 
 	public boolean includes(double value) {
 		//return this.includes(new IntervalBuilder().closed(value).closed(value).build());
-		return this.includes(new Interval(new FromIncludedEndPoint(value), new UntilIncludedEndPoint(value)));
+		return this.includes( new Interval(
+			new FromIncludedEndPoint(value, new Closed()),
+			new UntilIncludedEndPoint(value, new Closed())
+		  ));
 	}
 
 	public boolean includes(Interval that) {
 		return this.fromEndPoint.onLeft(that.fromEndPoint) && this.untilEndPoint.onRight(that.untilEndPoint);
 	}
+	
 
 }

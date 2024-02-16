@@ -2,9 +2,8 @@ package edu.ucv;
 
 class FromEndPoint extends EndPoint {
 
-	FromEndPoint(double value) {
-		super(value);
-		this.mode = new Open();
+	FromEndPoint(double value, Mode mode) {
+		super(value, mode);
 	}
 
 	boolean onLeft(FromEndPoint that) {

@@ -2,9 +2,8 @@ package edu.ucv;
 
 class UntilEndPoint extends EndPoint {
 
-	UntilEndPoint(double value) {
-		super(value);
-		this.mode = new Open();
+	UntilEndPoint(double value, Mode mode) {
+		super(value, mode);
 	}
 
 	boolean onRight(UntilEndPoint that) {

@@ -6,9 +6,9 @@ class EndPoint {
 	
 	protected Mode mode;
 	
-	protected EndPoint(double value) {
-		super();
-		this.setValue(value);
+	protected EndPoint(double value, Mode mode) {
+		this.value = value;
+		this.mode = mode;
 	}
 	
 	void shift(double value) {
