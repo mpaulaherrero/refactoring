@@ -11,13 +11,13 @@ class UntilEndPoint extends EndPoint {
 	}
 
 	boolean onRight(UntilEndPoint that) {
-		if (this.getValue() < that.getValue()) {
-			return false;
+		if (this.onRight(that.getValue())) {
+			return true;
 		}
-		if (this.getValue() == that.getValue() && that instanceof UntilIncludedEndPoint) {
-			return false;
+		if (this.getValue() == that.getValue()) {
+			return new OnRightChecker(that).onRight();
 		}
-		return true;
+		return false;
 	}
 
 }

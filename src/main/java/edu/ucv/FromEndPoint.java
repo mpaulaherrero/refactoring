@@ -11,13 +11,13 @@ class FromEndPoint extends EndPoint {
 	}
 
 	boolean onLeft(FromEndPoint that) {
-		if (this.getValue() > that.getValue()) {
-			return false;
+		if (this.onLeft(that.getValue())) {
+			return true;
 		}
-		if (this.getValue() == that.getValue() && that instanceof FromIncludedEndPoint) {
-			return false;
+		if (this.getValue() == that.getValue()) {
+			return new OnLeftChecker(that).onLeft();
 		}
-		return true;
+		return false;
 	}
 
 }
