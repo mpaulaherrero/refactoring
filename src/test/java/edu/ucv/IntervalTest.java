@@ -44,7 +44,7 @@ public class IntervalTest {
 	}
 	
 	@Test
-	public void InIncludedInfinityClosedModeMode() {
+	public void IsIncludedInfinityClosedModeMode() {
 		Interval inclusive = new IntervalBuilder().infinity().closed(7).build();
 		Interval included = new IntervalBuilder().open(4).closed(5).build();
 		assertTrue(inclusive.includes(included));
