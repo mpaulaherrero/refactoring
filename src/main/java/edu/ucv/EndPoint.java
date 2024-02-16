@@ -4,12 +4,9 @@ class EndPoint {
 
 	private double value;
 	
-	private boolean closed;
-	
-	protected EndPoint(double value, boolean closed) {
+	protected EndPoint(double value) {
 		super();
 		this.setValue(value);
-		this.setClosed(closed);
 	}
 	
 	void shift(double value) {
@@ -23,14 +20,5 @@ class EndPoint {
 	private void setValue(double value) {
 		this.value = value;
 	}
-
-	boolean isClosed() {
-		return closed;
-	}
-
-	private void setClosed(boolean closed) {
-		this.closed = closed;
-	}
-
 	
 }

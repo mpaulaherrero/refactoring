@@ -2,8 +2,8 @@ package edu.ucv;
 
 class FromIncludedEndPoint extends FromEndPoint {
 
-	FromIncludedEndPoint(double value, boolean closed) {
-		super(value, closed);
+	FromIncludedEndPoint(double value) {
+		super(value);
 	}
 
 	boolean onLeft(double value) {

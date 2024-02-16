@@ -2,8 +2,8 @@ package edu.ucv;
 
 class UntilEndPoint extends EndPoint {
 
-	UntilEndPoint(double value, boolean closed) {
-		super(value, closed);
+	UntilEndPoint(double value) {
+		super(value);
 	}
 
 	boolean onRight(double value) {
@@ -14,7 +14,7 @@ class UntilEndPoint extends EndPoint {
 		if (this.getValue() < that.getValue()) {
 			return false;
 		}
-		if (this.getValue() == that.getValue() && that.isClosed()) {
+		if (this.getValue() == that.getValue() && that instanceof UntilIncludedEndPoint) {
 			return false;
 		}
 		return true;

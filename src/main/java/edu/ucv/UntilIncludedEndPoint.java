@@ -2,8 +2,8 @@ package edu.ucv;
 
 class UntilIncludedEndPoint extends UntilEndPoint {
 
-	UntilIncludedEndPoint(double value, boolean closed) {
-		super(value, closed);
+	UntilIncludedEndPoint(double value) {
+		super(value);
 	}
 
 	boolean onRight(double value) {
