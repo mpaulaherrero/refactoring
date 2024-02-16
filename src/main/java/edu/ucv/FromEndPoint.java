@@ -1,16 +1,10 @@
 package edu.ucv;
 
-class FromEndPoint {
+class FromEndPoint extends EndPoint {
 
-	double value;
-
-	boolean closed;
-
-	FromEndPoint(double value, boolean closed) {
-		super();
-		this.value = value;
-		this.closed = closed;
+	FromEndPoint(double value, boolean included) {
+		super(value, included);
 	}
 	
-
+	
 }

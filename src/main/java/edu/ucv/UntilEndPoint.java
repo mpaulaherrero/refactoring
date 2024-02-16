@@ -1,15 +1,9 @@
 package edu.ucv;
 
-class UntilEndPoint {
+class UntilEndPoint extends EndPoint {
 
-	double value;
-
-	boolean closed;
-
-	UntilEndPoint(double value, boolean closed) {
-		super();
-		this.value = value;
-		this.closed = closed;
+	UntilEndPoint(double value, boolean included) {
+		super(value, included);
 	}
 	
 }
