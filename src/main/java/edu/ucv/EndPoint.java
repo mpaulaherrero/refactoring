@@ -11,11 +11,11 @@ class EndPoint {
 		this.setMode(mode);
 	}
 	
-	void shift(double value) {
+	public void shift(double value) {
 		this.setValue(this.getValue() + value);
 	}
 
-	double getValue() {
+	public double getValue() {
 		return value;
 	}
 
@@ -23,7 +23,7 @@ class EndPoint {
 		this.value = value;
 	}
 
-	protected Mode getMode() {
+	public Mode getMode() {
 		return mode;
 	}
 

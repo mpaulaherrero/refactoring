@@ -2,22 +2,22 @@ package edu.ucv;
 
 public class Interval {
 
-	private FromEndPoint fromEndPoint;
+	private From from;
 
 	private UntilEndPoint untilEndPoint;
 
-	public Interval(FromEndPoint fromEndPoint, UntilEndPoint untilEndPoint) {
-		this.fromEndPoint = fromEndPoint;
+	public Interval(From from, UntilEndPoint untilEndPoint) {
+		this.from = from;
 		this.untilEndPoint = untilEndPoint;
 	}
 
 	public void shift(double value) {
-		this.fromEndPoint.shift(value);
+		this.from.shift(value);
 		this.untilEndPoint.shift(value);
 	}
 
 	public double length() {
-		return this.untilEndPoint.getValue() - this.fromEndPoint.getValue();
+		return this.untilEndPoint.getValue() - this.from.getValue();
 	}
 
 	public boolean includes(double value) {
@@ -29,7 +29,7 @@ public class Interval {
 	}
 
 	public boolean includes(Interval that) {
-		return this.fromEndPoint.onLeft(that.fromEndPoint) && this.untilEndPoint.onRight(that.untilEndPoint);
+		return this.from.onLeft(that.from) && this.untilEndPoint.onRight(that.untilEndPoint);
 	}
 	
 

@@ -2,7 +2,7 @@ package edu.ucv;
 
 public class IntervalBuilder {
 
-	private FromEndPoint fromEndPoint;
+	private From from;
 
 	private UntilEndPoint untilEndPoint;
 
@@ -15,7 +15,7 @@ public class IntervalBuilder {
 	public IntervalBuilder open(double value) {
 		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
 		if (intervalBuilderState == null) {
-			this.fromEndPoint = new FromEndPoint(value, new Open());
+			this.from = new FromEndPoint(value, new Open());
 			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
 		} else {
 			this.untilEndPoint = new UntilEndPoint(value, new Open());
@@ -27,7 +27,7 @@ public class IntervalBuilder {
 	public IntervalBuilder closed(double value) {
 		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
 		if (intervalBuilderState == null) {
-			this.fromEndPoint = new FromEndPoint(value, new Closed());
+			this.from = new FromEndPoint(value, new Closed());
 			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
 		} else {
 			this.untilEndPoint = new UntilEndPoint(value, new Closed());
@@ -35,8 +35,21 @@ public class IntervalBuilder {
 		}
 		return this;
 	}
+	
+	public IntervalBuilder infinity() {
+		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
+		if (intervalBuilderState == null) {
+			this.from = new FromNegativeInfinity();
+			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
+		} else {
+			this.untilEndPoint = null;
+			intervalBuilderState = IntervalBuilderState.MAXIMUM_SETTED;
+		}
+		return this;
+	}
 
 	public Interval build() {
-		return new Interval(this.fromEndPoint, this.untilEndPoint);
+		return new Interval(this.from, this.untilEndPoint);
 	}
+	
 }
