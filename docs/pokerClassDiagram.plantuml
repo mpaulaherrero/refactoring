@@ -1,0 +1,98 @@
+@startuml poker
+skinparam ClassBackgroundColor white
+skinparam classAttributeIconSize 0
+show circle
+
+class Deck {
+# cardList: List<Card>
++ Deck()
++ getCard(): Card
+}
+
+class Card {
+- suite: Suite
+- value: Value
++ Card(Suite suite, Value value)
++ greater(Card card): boolean
++ getValue(): Value
++ getSuite(): Suite
++ toString(): String
+}
+
+enum GambleType {
+CARTA_ALTA
+PAREJA
+DOBLE_PAREJA
+TRIO
+ESCALERA
+COLOR
+FULL
+POQUER
+ESCALERA_COLOR
+ESCALERA_REAL
++ equals(GambleType gambleType): boolean
++ greater(GambleType gambleType): boolean
+}
+
+class Player {
+- cardList: List<Card>
+- valuesCont: int[]
+- suitesCont: int[]
+- gambleType: GambleType
+- orderedValues: List<Value>
++ Player()
++ add(Card card)
++ whoIsWinner(Player player): Player
++ toString(): String
+- setGambleType()
+- getMaxValue(): Value
+- hasSameValue(int amount): boolean
+- hasSameColor(int amount): boolean
+- hasTwoPairs(): boolean
+- getOrderedValues(int amount): List<Value>
+- getOrderedValues(): List<Value>
+- hasStairStart(Value value): boolean
+- hasStair(): boolean
+}
+
+enum Suite {
+CORAZONES
+DIAMANTES
+PICAS
+TREBOLES
+- title: String
+- Suite(String title)
+- next(): Suite
++ getTitle(): String
++ next(int amount): Suite
+}
+
+enum Value{
+DOS
+TRES
+CUATRO
+CINCO
+SEIS
+SIETE
+OCHO
+NUEVE
+DIEZ
+INFANTE
+REINA
+REY
+AS
+- title: String
+- Value(String title)
++ getTitle(): String
++ greater(Value value): boolean
++ next(int amount): Value
+- next(): Value
+}
+
+Deck *-d- "*" Card
+Player *-d- "*" Card
+Player *-d- "*" Value
+Player -r-> GambleType
+Card -d-> Value
+Card -d-> Suite
+@enduml
