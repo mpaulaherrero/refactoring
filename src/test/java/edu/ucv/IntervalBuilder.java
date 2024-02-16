@@ -2,13 +2,9 @@ package edu.ucv;
 
 public class IntervalBuilder {
 
-	private double minimum;
+	private FromEndPoint fromEndPoint;
 
-	private boolean minimumClosed;
-
-	private double maximum;
-
-	private boolean maximumClosed;
+	private UntilEndPoint untilEndPoint;
 
 	private IntervalBuilderState intervalBuilderState;
 
@@ -19,12 +15,10 @@ public class IntervalBuilder {
 	public IntervalBuilder open(double value) {
 		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
 		if (intervalBuilderState == null) {
-			this.minimum = value;
-			this.minimumClosed = false;
+			this.fromEndPoint = new FromEndPoint(value, false);
 			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
 		} else {
-			this.maximum = value;
-			this.maximumClosed = false;
+			this.untilEndPoint = new UntilEndPoint(value, false);
 			intervalBuilderState = IntervalBuilderState.MAXIMUM_SETTED;
 		}
 		return this;
@@ -33,18 +27,16 @@ public class IntervalBuilder {
 	public IntervalBuilder closed(double value) {
 		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
 		if (intervalBuilderState == null) {
-			this.minimum = value;
-			this.minimumClosed = true;
+			this.fromEndPoint = new FromEndPoint(value, true);
 			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
 		} else {
-			this.maximum = value;
-			this.maximumClosed = true;
+			this.untilEndPoint = new UntilEndPoint(value, true);
 			intervalBuilderState = IntervalBuilderState.MAXIMUM_SETTED;
 		}
 		return this;
 	}
 
 	public Interval build() {
-		return new Interval(this.minimum, this.minimumClosed, this.maximum, this.maximumClosed);
+		return new Interval(this.fromEndPoint, this.untilEndPoint);
 	}
 }

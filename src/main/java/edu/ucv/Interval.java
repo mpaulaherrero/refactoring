@@ -2,14 +2,13 @@ package edu.ucv;
 
 public class Interval {
 
-	private FromEndPoint fromEndPoint;
+	private FromEndPoint fromEndPoint; 
 	
 	private UntilEndPoint untilEndPoint;
-
-	public Interval(double minimum, boolean minimumClosed, double maximum, boolean maximumClosed) {
-		assert minimum < maximum || minimum == maximum && minimumClosed || !minimumClosed;
-		this.fromEndPoint = new FromEndPoint(minimum, minimumClosed);
-		this.untilEndPoint = new UntilEndPoint(maximum, maximumClosed);
+	
+	public Interval(FromEndPoint fromEndPoint, UntilEndPoint untilEndPoint) {
+		this.fromEndPoint = fromEndPoint;
+		this.untilEndPoint = untilEndPoint;
 	}
 
 	public void shift(double value) {
