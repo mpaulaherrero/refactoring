@@ -25,25 +25,7 @@ public class Interval {
 	}
 
 	public boolean includes(Interval that) {
-		if (this.fromEndPoint.getValue() > that.fromEndPoint.getValue()) {
-			return false;
-		}
-		if (this.fromEndPoint.isClosed()) {
-		} else {
-			if (this.fromEndPoint.getValue() == that.fromEndPoint.getValue() && that.fromEndPoint.isClosed()) {
-				return false;
-			}
-		}
-		if (this.untilEndPoint.getValue() < that.untilEndPoint.getValue()) {
-			return false;
-		}
-		if (this.untilEndPoint.isClosed()) {
-		} else {
-			if (this.untilEndPoint.getValue() == that.untilEndPoint.getValue() && that.untilEndPoint.isClosed()) {
-				return false;
-			}
-		}
-		return true;
+		return this.fromEndPoint.onLeft(that.fromEndPoint) && this.untilEndPoint.onRight(that.untilEndPoint);
 	}
 
 }

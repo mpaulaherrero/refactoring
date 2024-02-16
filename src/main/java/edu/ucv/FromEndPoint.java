@@ -18,4 +18,18 @@ class FromEndPoint extends EndPoint {
 		}
 		return true;
 	}
+
+	boolean onLeft(FromEndPoint that) {
+		if (this.getValue() > that.getValue()) {
+			return false;
+		}
+		if (this.isClosed()) {
+		} else {
+			if (this.getValue() == that.getValue() && that.isClosed()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
+

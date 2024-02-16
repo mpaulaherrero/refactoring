@@ -18,5 +18,18 @@ class UntilEndPoint extends EndPoint {
 		}
 		return true;
 	}
+
+	boolean onRight(UntilEndPoint that) {
+		if (this.getValue() < that.getValue()) {
+			return false;
+		}
+		if (this.isClosed()) {
+		} else {
+			if (this.getValue() == that.getValue() && that.isClosed()) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }
