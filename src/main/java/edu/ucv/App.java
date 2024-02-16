@@ -13,5 +13,8 @@ public class App
         } else {
             System.out.println( "Fecha invalida" );
         }
+
+        Interval interval = new Interval(4.4, true, 5.6, false);
+        System.out.println( "interval length: " + interval.length());
     }
 }

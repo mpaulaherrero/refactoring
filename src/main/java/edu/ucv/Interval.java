@@ -26,18 +26,47 @@ public class Interval {
 	public double length() {
 		return this.maximum - this.minimum;
 	}
-	
+
 	public boolean includes(double value) {
-		return (this.minimum < value || this.minimum == value && this.minimumClosed) && 
-			(value < this.maximum || this.maximum == value && this.maximumClosed);
-	}
-	
-	public boolean includes(Interval that) {
-		if (this.minimum > that.minimum || this.minimum == that.minimum && !this.minimumClosed && that.minimumClosed) {
+		if (this.minimumClosed) {
+			if (value < this.minimum) {
 				return false;
 			}
-		if (this.maximum < that.maximum || this.maximum == that.maximum && !this.maximumClosed && that.maximumClosed) {
+		} else {
+			if (value <= this.minimum) {
 				return false;
+			}
+		}
+		if (this.maximumClosed) {
+			if (value > this.maximum) {
+				return false;
+			}
+		} else {
+			if (value >= this.maximum) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean includes(Interval that) {
+		if (this.minimum > that.minimum) {
+			return false;
+		}
+		if (this.minimumClosed) {
+		} else {
+			if (this.minimum == that.minimum && that.minimumClosed) {
+				return false;
+			}
+		}
+		if (this.maximum < that.maximum) {
+			return false;
+		}
+		if (this.maximumClosed) {
+		} else {
+			if (this.maximum == that.maximum && that.maximumClosed) {
+				return false;
+			}
 		}
 		return true;
 	}
