@@ -8,5 +8,7 @@ public interface From {
 	
 	double getValue();
 	
+	double distance(UntilEndPoint untilEndPoint);
+	
 	Mode getMode();
 }

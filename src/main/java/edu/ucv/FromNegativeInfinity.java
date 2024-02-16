@@ -25,4 +25,9 @@ public class FromNegativeInfinity implements From {
 		return null;
 	}
 
+	@Override
+	public double distance(UntilEndPoint untilEndPoint) {
+		return Double.POSITIVE_INFINITY;
+	}
+
 }

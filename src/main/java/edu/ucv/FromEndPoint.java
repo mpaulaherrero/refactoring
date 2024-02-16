@@ -16,4 +16,9 @@ class FromEndPoint extends EndPoint implements From  {
 		return false;
 	}
 
+	@Override
+	public double distance(UntilEndPoint untilEndPoint) {
+		return untilEndPoint.getValue() - this.getValue();
+	}
+
 }
