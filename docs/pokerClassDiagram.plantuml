@@ -38,21 +38,20 @@ class Player {
 - cardList: List<Card>
 - valuesCont: int[]
 - suitesCont: int[]
-- gambleType: GambleType
-- orderedValues: List<Value>
+- gamble: Gamble
 + Player()
 + add(Card card)
 + whoIsWinner(Player player): Player
 + toString(): String
-- setGambleType()
-- getMaxValue(): Value
-- hasSameValue(int amount): boolean
-- hasSameColor(int amount): boolean
-- hasTwoPairs(): boolean
-- getOrderedValues(int amount): List<Value>
-- getOrderedValues(): List<Value>
-- hasStairStart(Value value): boolean
-- hasStair(): boolean
+- getGamble(): Gamble
++ getMaxValue(): Value
++ hasSameValue(int amount): boolean
++ hasSameColor(int amount): boolean
++ hasTwoPairs(): boolean
++ getOrderedValues(int amount): List<Value>
++ getOrderedValues(): List<Value>
++ hasStairStart(Value value): boolean
++ hasStair(): boolean
 }
 
 enum Suite {
@@ -89,10 +88,21 @@ AS
 - next(): Value
 }
 
+class Gamble {
+# gambleType: GambleType
+- orderedValues: List<Value>
++ Gamble(GambleType gambleType, List<Value> orderedValues)
++ whoIsWinner(Gamble gamble): Gamble
+- whoIsWinnerWithSameGambleType(Gamble gamble): Gamble
++ toString(): String
+}
+
 Deck *-d- "*" Card
 Player *-d- "*" Card
 Player *-d- "*" Value
-Player -r-> GambleType
+Player *-r- Gamble
+Gamble -d-> GambleType
+Gamble -d-> "*" Value
 Card -d-> Value
 Card -d-> Suite
 @enduml
