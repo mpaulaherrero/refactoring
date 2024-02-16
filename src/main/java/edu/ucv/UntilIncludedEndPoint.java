@@ -7,7 +7,11 @@ class UntilIncludedEndPoint extends UntilEndPoint {
 	}
 
 	boolean onRight(double value) {
-		return super.onRight(value) ||value == this.getValue();
+		return super.onRight(value) || value == this.getValue();
+	}
+	
+	boolean onRight(UntilEndPoint that) {
+		return this.getValue() >= that.getValue();
 	}
 
 }

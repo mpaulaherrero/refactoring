@@ -7,6 +7,10 @@ class FromIncludedEndPoint extends FromEndPoint {
 	}
 
 	boolean onLeft(double value) {
-		return super.onLeft(value) ||  this.getValue() == value;
+		return super.onLeft(value) || this.getValue() == value;
+	}
+
+	boolean onLeft(FromEndPoint that) {
+		return this.getValue() <= that.getValue();
 	}
 }

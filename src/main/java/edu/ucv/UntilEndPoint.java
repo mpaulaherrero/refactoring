@@ -14,13 +14,10 @@ class UntilEndPoint extends EndPoint {
 		if (this.getValue() < that.getValue()) {
 			return false;
 		}
-		if (this.isClosed()) {
-		} else {
-			if (this.getValue() == that.getValue() && that.isClosed()) {
-				return false;
-			}
+		if (this.getValue() == that.getValue() && that.isClosed()) {
+			return false;
 		}
 		return true;
 	}
-	
+
 }
