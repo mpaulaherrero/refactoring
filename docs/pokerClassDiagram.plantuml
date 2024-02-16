@@ -36,22 +36,12 @@ ESCALERA_REAL
 
 class Player {
 - cardList: List<Card>
-- valuesCont: int[]
-- suitesCont: int[]
 - gamble: Gamble
 + Player()
 + add(Card card)
 + whoIsWinner(Player player): Player
 + toString(): String
 - getGamble(): Gamble
-+ getMaxValue(): Value
-+ hasSameValue(int amount): boolean
-+ hasSameColor(int amount): boolean
-+ hasTwoPairs(): boolean
-+ getOrderedValues(int amount): List<Value>
-+ getOrderedValues(): List<Value>
-+ hasStairStart(Value value): boolean
-+ hasStair(): boolean
 }
 
 enum Suite {
@@ -97,10 +87,26 @@ class Gamble {
 + toString(): String
 }
 
+class PlayerStatistics {
+- valuesCont: int[]
+- suitesCont: int[]
++ PlayerStatistics(List<Card> cardList)
++ getMaxValue(): Value
++ hasSameValue(int amount): boolean
++ hasSameColor(int amount): boolean
++ hasTwoPairs(): boolean
++ getOrderedValues(int amount): List<Value>
++ getOrderedValues(): List<Value>
++ hasStairStart(Value value): boolean
++ hasStair(): boolean
+}
+
 Deck *-d- "*" Card
 Player *-d- "*" Card
-Player *-d- "*" Value
 Player *-r- Gamble
+Player *-d- PlayerStatistics
+PlayerStatistics -d-> "*" Card
+PlayerStatistics *-d- "*" Value
 Gamble -d-> GambleType
 Gamble -d-> "*" Value
 Card -d-> Value
