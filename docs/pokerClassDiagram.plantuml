@@ -102,6 +102,14 @@ class PlayerStatistics {
 }
 
 package analyzers {
+    class GambleAnalyzer {
+        - dobleParejaAnalyzer: DobleParejaAnalyzer
+        - parejaAnalyzer: ParejaAnalyzer
+        - cartaAltaAnalyzer: CartaAltaAnalyzer
+	    + GambleAnalyzer()
+        + getGamble(PlayerStatistics playerStatistics): Gamble
+    }
+
     class CartaAltaAnalyzer {
     + getGamble(PlayerStatistics playerStatistics): Gamble
     }
@@ -116,11 +124,9 @@ package analyzers {
 Deck *-d- "*" Card
 
 Player *-d- "*" Card
-Player *-r- Gamble
+Player -r-> Gamble
 Player *-d- PlayerStatistics
-Player *-d- CartaAltaAnalyzer
-Player *-d- DobleParejaAnalyzer
-Player *-d- ParejaAnalyzer
+Player *- GambleAnalyzer
 
 PlayerStatistics -d-> "*" Card
 PlayerStatistics *-d- "*" Value
@@ -131,6 +137,11 @@ Gamble -d-> "*" Value
 Card -d-> Value
 Card -d-> Suite
 
+GambleAnalyzer -> Gamble
+GambleAnalyzer -> PlayerStatistics
+GambleAnalyzer *-d- CartaAltaAnalyzer
+GambleAnalyzer *-d- DobleParejaAnalyzer
+GambleAnalyzer *-d- ParejaAnalyzer
 
 CartaAltaAnalyzer -d-> PlayerStatistics
 CartaAltaAnalyzer *-d- Gamble

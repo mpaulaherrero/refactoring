@@ -3,9 +3,7 @@ package edu.ucv.poker;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ucv.poker.analyzers.CartaAltaAnalyzer;
-import edu.ucv.poker.analyzers.DobleParejaAnalyzer;
-import edu.ucv.poker.analyzers.ParejaAnalyzer;
+import edu.ucv.poker.analyzers.GambleAnalyzer;
 
 public class Player {
 
@@ -32,24 +30,19 @@ public class Player {
 			return null;
 		}
 	}
-
-	private Gamble getGamble() {
-		PlayerStatistics playerStatistics = new PlayerStatistics(cardList);
-		if (gamble == null) {
-			gamble = new DobleParejaAnalyzer().getGamble(playerStatistics);
-			if (gamble == null) {
-				gamble = new ParejaAnalyzer().getGamble(playerStatistics);
-				if (gamble == null) {
-					gamble = new CartaAltaAnalyzer().getGamble(playerStatistics);
-				}
-			}
+	
+	private Gamble getGamble(){
+		if (gamble == null){
+			gamble = new GambleAnalyzer().getGamble(new PlayerStatistics(cardList));
 		}
 		return gamble;
 	}
 
 	@Override
 	public String toString() {
-		return "Player [\ncardList=" + cardList + ", \ngamble=" + gamble + "]";
+		return "Player [\ncardList=" + cardList  
+				+ ", \ngamble=" + gamble
+				+ "]";
 	}
 
 }

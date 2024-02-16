@@ -7,7 +7,8 @@ import edu.ucv.poker.GambleType;
 import edu.ucv.poker.PlayerStatistics;
 import edu.ucv.poker.Value;
 
-public class DobleParejaAnalyzer { 
+class DobleParejaAnalyzer { 
+
 
 	public Gamble getGamble(PlayerStatistics playerStatistics) {
 		if (playerStatistics.hasTwoPairs()) {
