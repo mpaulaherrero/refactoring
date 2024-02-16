@@ -8,39 +8,35 @@ public class Interval {
 
 	public Interval(double minimum, boolean minimumClosed, double maximum, boolean maximumClosed) {
 		assert minimum < maximum || minimum == maximum && minimumClosed || !minimumClosed;
-		this.fromEndPoint = new FromEndPoint();
-		this.fromEndPoint.minimum = minimum;
-		this.fromEndPoint.minimumClosed = minimumClosed;
-		this.untilEndPoint = new UntilEndPoint();
-		this.untilEndPoint.maximum = maximum;
-		this.untilEndPoint.maximumClosed = maximumClosed;
+		this.fromEndPoint = new FromEndPoint(minimum, minimumClosed);
+		this.untilEndPoint = new UntilEndPoint(maximum, maximumClosed);
 	}
 
 	public void shift(double value) {
-		this.fromEndPoint.minimum += value;
-		this.untilEndPoint.maximum += value;
+		this.fromEndPoint.value += value;
+		this.untilEndPoint.value += value;
 	}
 
 	public double length() {
-		return this.untilEndPoint.maximum - this.fromEndPoint.minimum;
+		return this.untilEndPoint.value - this.fromEndPoint.value;
 	}
 
 	public boolean includes(double value) {
-		if (this.fromEndPoint.minimumClosed) {
-			if (value < this.fromEndPoint.minimum) {
+		if (this.fromEndPoint.closed) {
+			if (value < this.fromEndPoint.value) {
 				return false;
 			}
 		} else {
-			if (value <= this.fromEndPoint.minimum) {
+			if (value <= this.fromEndPoint.value) {
 				return false;
 			}
 		}
-		if (this.untilEndPoint.maximumClosed) {
-			if (value > this.untilEndPoint.maximum) {
+		if (this.untilEndPoint.closed) {
+			if (value > this.untilEndPoint.value) {
 				return false;
 			}
 		} else {
-			if (value >= this.untilEndPoint.maximum) {
+			if (value >= this.untilEndPoint.value) {
 				return false;
 			}
 		}
@@ -48,25 +44,25 @@ public class Interval {
 	}
 
 	public boolean includes(Interval that) {
-		if (this.fromEndPoint.minimum > that.fromEndPoint.minimum) {
+		if (this.fromEndPoint.value > that.fromEndPoint.value) {
 			return false;
 		}
-		if (this.fromEndPoint.minimumClosed) {
+		if (this.fromEndPoint.closed) {
 		} else {
-			if (this.fromEndPoint.minimum == that.fromEndPoint.minimum && that.fromEndPoint.minimumClosed) {
+			if (this.fromEndPoint.value == that.fromEndPoint.value && that.fromEndPoint.closed) {
 				return false;
 			}
 		}
-		if (this.untilEndPoint.maximum < that.untilEndPoint.maximum) {
+		if (this.untilEndPoint.value < that.untilEndPoint.value) {
 			return false;
 		}
-		if (this.untilEndPoint.maximumClosed) {
+		if (this.untilEndPoint.closed) {
 		} else {
-			if (this.untilEndPoint.maximum == that.untilEndPoint.maximum && that.untilEndPoint.maximumClosed) {
+			if (this.untilEndPoint.value == that.untilEndPoint.value && that.untilEndPoint.closed) {
 				return false;
 			}
 		}
 		return true;
 	}
-
+	
 }

@@ -2,8 +2,15 @@ package edu.ucv;
 
 class FromEndPoint {
 
-	double minimum;
+	double value;
 
-	boolean minimumClosed;
+	boolean closed;
+
+	FromEndPoint(double value, boolean closed) {
+		super();
+		this.value = value;
+		this.closed = closed;
+	}
 	
+
 }
