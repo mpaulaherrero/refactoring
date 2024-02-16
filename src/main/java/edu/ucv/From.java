@@ -9,6 +9,4 @@ public interface From {
 	void shift(double value);
 	
 	double getValue();
-	
-	Mode getMode();
 }

@@ -17,12 +17,6 @@ public class FromNegativeInfinity implements From {
 	}
 
 	@Override
-	public Mode getMode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public double distance(UntilEndPoint untilEndPoint) {
 		return Double.POSITIVE_INFINITY;
 	}

@@ -11,7 +11,7 @@ class FromEndPoint extends EndPoint implements From  {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {
-			return this.getMode().includes(that.getMode());
+			return this.getMode().includes(((FromEndPoint) that).getMode());
 		}
 		return false;
 	}

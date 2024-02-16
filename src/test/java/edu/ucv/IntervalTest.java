@@ -32,7 +32,38 @@ public class IntervalTest {
 	}
 
 	@Test
-	public void IsIncludeDoubleIncludedIncludedtest() {
+	public void IsIncludedDoubleInfinityMode() {
+		Interval interval = new IntervalBuilder().infinity().open(4).build();
+		assertTrue(interval.includes(Double.MIN_VALUE));
+		assertTrue(interval.includes(4 - PRECISION));
+		assertFalse(interval.includes(4));
+		interval = new IntervalBuilder().infinity().closed(4).build();
+		assertTrue(interval.includes(Double.MIN_VALUE));
+		assertTrue(interval.includes(4));
+		assertFalse(interval.includes(4 + PRECISION));
+	}
+	
+	@Test
+	public void InIncludedInfinityClosedModeMode() {
+		Interval inclusive = new IntervalBuilder().infinity().closed(7).build();
+		Interval included = new IntervalBuilder().open(4).closed(5).build();
+		assertTrue(inclusive.includes(included));
+		included = new IntervalBuilder().open(4).closed(9).build();
+		assertFalse(inclusive.includes(included));
+		
+		included = new IntervalBuilder().closed(4).closed(5).build();
+		assertTrue(inclusive.includes(included));
+		included = new IntervalBuilder().closed(4).closed(9).build();
+		assertFalse(inclusive.includes(included));
+		
+		included = new IntervalBuilder().infinity().closed(5).build();
+		assertTrue(inclusive.includes(included));
+		included = new IntervalBuilder().infinity().closed(9).build();
+		assertFalse(inclusive.includes(included));
+	}
+
+	@Test
+	public void IsIncludeDoubleClosedClosedTest() {
 		Interval interval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(interval.includes(-(4 + PRECISION)));
 		assertTrue(interval.includes(-4));
@@ -85,7 +116,7 @@ public class IntervalTest {
 		inclusiveInterval = new IntervalBuilder().open(-4).open(4).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
-		
+
 		inclusiveInterval = new IntervalBuilder().closed(-2).closed(2).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
@@ -98,7 +129,7 @@ public class IntervalTest {
 		inclusiveInterval = new IntervalBuilder().open(-2).open(2).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
-		
+
 		inclusiveInterval = new IntervalBuilder().closed(-6).closed(6).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertTrue(inclusiveInterval.includes(includedInterval));
@@ -111,7 +142,7 @@ public class IntervalTest {
 		inclusiveInterval = new IntervalBuilder().open(-6).open(6).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertTrue(inclusiveInterval.includes(includedInterval));
-		
+
 		inclusiveInterval = new IntervalBuilder().closed(0).closed(6).build();
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
@@ -125,7 +156,7 @@ public class IntervalTest {
 		includedInterval = new IntervalBuilder().closed(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
 	}
-	
+
 	@Test
 	public void IsIncludeIntervalOpenClosedTest() {
 		Interval inclusiveInterval = new IntervalBuilder().closed(-4).closed(4).build();
@@ -141,7 +172,7 @@ public class IntervalTest {
 		includedInterval = new IntervalBuilder().open(-4).closed(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
 	}
-	
+
 	@Test
 	public void IsIncludeIntervalClosedOpenTest() {
 		Interval inclusiveInterval = new IntervalBuilder().closed(-4).closed(4).build();
@@ -157,7 +188,7 @@ public class IntervalTest {
 		includedInterval = new IntervalBuilder().closed(-4).open(4).build();
 		assertFalse(inclusiveInterval.includes(includedInterval));
 	}
-	
+
 	@Test
 	public void IsIncludeIntervalOpenOpenTest() {
 		Interval inclusiveInterval = new IntervalBuilder().closed(-4).closed(4).build();
