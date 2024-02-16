@@ -3,6 +3,10 @@ package edu.ucv.poker;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ucv.poker.analyzers.CartaAltaAnalyzer;
+import edu.ucv.poker.analyzers.DobleParejaAnalyzer;
+import edu.ucv.poker.analyzers.ParejaAnalyzer;
+
 public class Player {
 
 	private List<Card> cardList;
@@ -16,7 +20,7 @@ public class Player {
 	public void add(Card card) {
 		cardList.add(card);
 	}
-	
+
 	public Player whoIsWinner(Player player) {
 		assert player != null;
 		Gamble winner = this.getGamble().whoIsWinner(player.getGamble());
@@ -28,23 +32,15 @@ public class Player {
 			return null;
 		}
 	}
-	
-	private Gamble getGamble(){
+
+	private Gamble getGamble() {
 		PlayerStatistics playerStatistics = new PlayerStatistics(cardList);
 		if (gamble == null) {
-			if (playerStatistics.hasTwoPairs()) {
-				List<Value> orderedValues = playerStatistics.getOrderedValues(2);
-				orderedValues.addAll(playerStatistics.getOrderedValues(1));
-				gamble = new Gamble(GambleType.DOBLE_PAREJA, orderedValues);
-			} 
+			gamble = new DobleParejaAnalyzer().getGamble(playerStatistics);
 			if (gamble == null) {
-				if (playerStatistics.hasSameValue(2)) {
-					List<Value> orderedValues = playerStatistics.getOrderedValues(2);
-					orderedValues.addAll(playerStatistics.getOrderedValues(1));
-					gamble = new Gamble(GambleType.PAREJA, orderedValues);
-				}
+				gamble = new ParejaAnalyzer().getGamble(playerStatistics);
 				if (gamble == null) {
-					gamble = new Gamble(GambleType.CARTA_ALTA, playerStatistics.getOrderedValues(1));
+					gamble = new CartaAltaAnalyzer().getGamble(playerStatistics);
 				}
 			}
 		}

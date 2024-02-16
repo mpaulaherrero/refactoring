@@ -101,14 +101,49 @@ class PlayerStatistics {
 + hasStair(): boolean
 }
 
+package analyzers {
+    class CartaAltaAnalyzer {
+    + getGamble(PlayerStatistics playerStatistics): Gamble
+    }
+    class ParejaAnalyzer {
+    + getGamble(PlayerStatistics playerStatistics): Gamble
+    }
+    class DobleParejaAnalyzer {
+    + getGamble(PlayerStatistics playerStatistics): Gamble
+    }
+}
+
 Deck *-d- "*" Card
+
 Player *-d- "*" Card
 Player *-r- Gamble
 Player *-d- PlayerStatistics
+Player *-d- CartaAltaAnalyzer
+Player *-d- DobleParejaAnalyzer
+Player *-d- ParejaAnalyzer
+
 PlayerStatistics -d-> "*" Card
 PlayerStatistics *-d- "*" Value
+
 Gamble -d-> GambleType
 Gamble -d-> "*" Value
+
 Card -d-> Value
 Card -d-> Suite
+
+
+CartaAltaAnalyzer -d-> PlayerStatistics
+CartaAltaAnalyzer *-d- Gamble
+CartaAltaAnalyzer -d-> GambleType
+
+DobleParejaAnalyzer -d-> PlayerStatistics
+DobleParejaAnalyzer *-d- Gamble
+DobleParejaAnalyzer -d-> GambleType
+DobleParejaAnalyzer -d-> "*" Value
+
+ParejaAnalyzer -d-> PlayerStatistics
+ParejaAnalyzer *-d- Gamble
+ParejaAnalyzer -d-> GambleType
+ParejaAnalyzer -d-> "*" Value
+
 @enduml
