@@ -27,10 +27,10 @@ public class IntervalBuilder {
 	public IntervalBuilder closed(double value) {
 		assert intervalBuilderState != IntervalBuilderState.MAXIMUM_SETTED;
 		if (intervalBuilderState == null) {
-			this.fromEndPoint = new FromEndPoint(value, true);
+			this.fromEndPoint = new FromIncludedEndPoint(value, true);
 			intervalBuilderState = IntervalBuilderState.MINIMUM_SETTED;
 		} else {
-			this.untilEndPoint = new UntilEndPoint(value, true);
+			this.untilEndPoint = new UntilIncludedEndPoint(value, true);
 			intervalBuilderState = IntervalBuilderState.MAXIMUM_SETTED;
 		}
 		return this;
