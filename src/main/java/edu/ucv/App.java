@@ -4,7 +4,7 @@ package edu.ucv;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args ){
         Date date = new Date(34,8,1972);
@@ -15,7 +15,7 @@ public class App
         }
 
         Interval interval = new Interval(
-            new FromIncludedEndPoint(4.4,new Closed()),
+            new FromEndPoint(4.4,new Closed()),
             new UntilEndPoint(5.6, new Closed()));
         System.out.println( "interval length: " + interval.length());
     }

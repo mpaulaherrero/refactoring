@@ -23,8 +23,8 @@ public class Interval {
 	public boolean includes(double value) {
 		//return this.includes(new IntervalBuilder().closed(value).closed(value).build());
 		return this.includes( new Interval(
-			new FromIncludedEndPoint(value, new Closed()),
-			new UntilIncludedEndPoint(value, new Closed())
+			new FromEndPoint(value, new Closed()),
+			new UntilEndPoint(value, new Closed())
 		  ));
 	}
 

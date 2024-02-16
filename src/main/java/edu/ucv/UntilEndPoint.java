@@ -11,7 +11,7 @@ class UntilEndPoint extends EndPoint {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {
-			return this.mode.includes(that.mode);
+			return this.getMode().includes(that.getMode());
 		}
 		return false;
 	}

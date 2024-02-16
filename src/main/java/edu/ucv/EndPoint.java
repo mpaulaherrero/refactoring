@@ -4,11 +4,11 @@ class EndPoint {
 
 	private double value;
 	
-	protected Mode mode;
-	
+	private Mode mode;
+		
 	protected EndPoint(double value, Mode mode) {
 		this.value = value;
-		this.mode = mode;
+		this.setMode(mode);
 	}
 	
 	void shift(double value) {
@@ -21,6 +21,14 @@ class EndPoint {
 
 	private void setValue(double value) {
 		this.value = value;
+	}
+
+	protected Mode getMode() {
+		return mode;
+	}
+
+	protected void setMode(Mode mode) {
+		this.mode = mode;
 	}
 	
 }
