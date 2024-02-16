@@ -13,4 +13,9 @@ class FromIncludedEndPoint extends FromEndPoint {
 	boolean onLeft(FromEndPoint that) {
 		return this.getValue() <= that.getValue();
 	}
+	
+	@Override
+	public void accept(FromEndPointVisitor visitor) {
+		visitor.visit(this);
+	}
 }

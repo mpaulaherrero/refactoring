@@ -19,5 +19,9 @@ class UntilEndPoint extends EndPoint {
 		}
 		return false;
 	}
+	
+	public void accept(UntilEndPointVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }

@@ -1,16 +1,25 @@
 package edu.ucv;
 
-public class OnLeftChecker {
+public class OnLeftChecker implements FromEndPointVisitor {
 
-	private FromEndPoint included;
+	private boolean result;
 	
 	public OnLeftChecker(FromEndPoint included) {
-		super();
-		this.included = included;
+		included.accept(this);
 	}
 	
 	public boolean onLeft() {
-		return !(included instanceof FromIncludedEndPoint);
+		return result;
+	}
+	
+	@Override
+	public void visit(FromEndPoint included) {
+		result = true; 
+	}
+	
+	@Override
+	public void visit(FromIncludedEndPoint included) {
+		result = false; 
 	}
 
 }

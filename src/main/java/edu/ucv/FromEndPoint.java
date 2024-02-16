@@ -19,5 +19,9 @@ class FromEndPoint extends EndPoint {
 		}
 		return false;
 	}
+	
+	public void accept(FromEndPointVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }

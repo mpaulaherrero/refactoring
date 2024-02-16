@@ -13,5 +13,10 @@ class UntilIncludedEndPoint extends UntilEndPoint {
 	boolean onRight(UntilEndPoint that) {
 		return this.getValue() >= that.getValue();
 	}
+	
+	@Override
+	public void accept(UntilEndPointVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }

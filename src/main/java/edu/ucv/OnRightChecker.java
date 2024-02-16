@@ -1,16 +1,24 @@
 package edu.ucv;
 
-public class OnRightChecker {
+public class OnRightChecker implements UntilEndPointVisitor {
 
-	private UntilEndPoint included;
+	private boolean result;
 	
 	public OnRightChecker(UntilEndPoint included) {
-		super();
-		this.included = included;
+		included.accept(this);
 	}
 	
 	public boolean onRight() {
-		return !(included instanceof UntilIncludedEndPoint);
+		return result;
 	}
 	
+	@Override
+	public void visit(UntilEndPoint included) {
+		result = true; 
+	}
+	
+	@Override
+	public void visit(UntilIncludedEndPoint included) {
+		result = false; 
+	}
 }
