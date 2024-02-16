@@ -4,6 +4,8 @@ class EndPoint {
 
 	private double value;
 	
+	protected Mode mode;
+	
 	protected EndPoint(double value) {
 		super();
 		this.setValue(value);

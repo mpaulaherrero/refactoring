@@ -4,6 +4,7 @@ class FromEndPoint extends EndPoint {
 
 	FromEndPoint(double value) {
 		super(value);
+		this.mode = new Open();
 	}
 
 	boolean onLeft(double value) {
@@ -15,13 +16,9 @@ class FromEndPoint extends EndPoint {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {
-			return new OnLeftChecker(that).onLeft();
+			return this.mode.includes(that.mode);
 		}
 		return false;
-	}
-	
-	public void accept(FromEndPointVisitor visitor) {
-		visitor.visit(this);
 	}
 
 }

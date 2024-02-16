@@ -4,6 +4,7 @@ class UntilEndPoint extends EndPoint {
 
 	UntilEndPoint(double value) {
 		super(value);
+		this.mode = new Open();
 	}
 
 	boolean onRight(double value) {
@@ -15,13 +16,9 @@ class UntilEndPoint extends EndPoint {
 			return true;
 		}
 		if (this.getValue() == that.getValue()) {
-			return new OnRightChecker(that).onRight();
+			return this.mode.includes(that.mode);
 		}
 		return false;
-	}
-	
-	public void accept(UntilEndPointVisitor visitor) {
-		visitor.visit(this);
 	}
 
 }
