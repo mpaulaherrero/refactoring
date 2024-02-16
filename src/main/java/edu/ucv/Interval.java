@@ -5,37 +5,37 @@ public class Interval {
 	private FromEndPoint fromEndPoint; 
 	
 	private UntilEndPoint untilEndPoint;
-	
+
 	public Interval(FromEndPoint fromEndPoint, UntilEndPoint untilEndPoint) {
 		this.fromEndPoint = fromEndPoint;
 		this.untilEndPoint = untilEndPoint;
 	}
 
 	public void shift(double value) {
-		this.fromEndPoint.value += value;
-		this.untilEndPoint.value += value;
+		this.fromEndPoint.shift(value);
+		this.untilEndPoint.shift(value);
 	}
 
 	public double length() {
-		return this.untilEndPoint.value - this.fromEndPoint.value;
+		return this.untilEndPoint.getValue() - this.fromEndPoint.getValue();
 	}
 
 	public boolean includes(double value) {
-		if (this.fromEndPoint.closed) {
-			if (value < this.fromEndPoint.value) {
+		if (this.fromEndPoint.isClosed()) {
+			if (value < this.fromEndPoint.getValue()) {
 				return false;
 			}
 		} else {
-			if (value <= this.fromEndPoint.value) {
+			if (value <= this.fromEndPoint.getValue()) {
 				return false;
 			}
 		}
-		if (this.untilEndPoint.closed) {
-			if (value > this.untilEndPoint.value) {
+		if (this.untilEndPoint.isClosed()) {
+			if (value > this.untilEndPoint.getValue()) {
 				return false;
 			}
 		} else {
-			if (value >= this.untilEndPoint.value) {
+			if (value >= this.untilEndPoint.getValue()) {
 				return false;
 			}
 		}
@@ -43,25 +43,25 @@ public class Interval {
 	}
 
 	public boolean includes(Interval that) {
-		if (this.fromEndPoint.value > that.fromEndPoint.value) {
+		if (this.fromEndPoint.getValue() > that.fromEndPoint.getValue()) {
 			return false;
 		}
-		if (this.fromEndPoint.closed) {
+		if (this.fromEndPoint.isClosed()) {
 		} else {
-			if (this.fromEndPoint.value == that.fromEndPoint.value && that.fromEndPoint.closed) {
+			if (this.fromEndPoint.getValue() == that.fromEndPoint.getValue() && that.fromEndPoint.isClosed()) {
 				return false;
 			}
 		}
-		if (this.untilEndPoint.value < that.untilEndPoint.value) {
+		if (this.untilEndPoint.getValue() < that.untilEndPoint.getValue()) {
 			return false;
 		}
-		if (this.untilEndPoint.closed) {
+		if (this.untilEndPoint.isClosed()) {
 		} else {
-			if (this.untilEndPoint.value == that.untilEndPoint.value && that.untilEndPoint.closed) {
+			if (this.untilEndPoint.getValue() == that.untilEndPoint.getValue() && that.untilEndPoint.isClosed()) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
+
 }
