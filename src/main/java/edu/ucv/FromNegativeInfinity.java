@@ -16,8 +16,7 @@ public class FromNegativeInfinity implements From {
 
 	@Override
 	public double getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Double.NEGATIVE_INFINITY;
 	}
 
 	@Override

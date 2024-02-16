@@ -17,6 +17,9 @@ public class Interval {
 	}
 
 	public double length() {
+		if (this.from.getValue() == Double.NEGATIVE_INFINITY) {
+			return Double.POSITIVE_INFINITY;
+		}
 		return this.untilEndPoint.getValue() - this.from.getValue();
 	}
 
