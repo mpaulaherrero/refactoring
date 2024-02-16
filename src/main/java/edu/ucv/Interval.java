@@ -21,6 +21,10 @@ public class Interval {
 	}
 
 	public boolean includes(double value) {
+		return this.fromEndPointOnLeft(value) && this.untilEndPointOnRight(value);
+	}
+
+	private boolean fromEndPointOnLeft(double value) {
 		if (this.fromEndPoint.isClosed()) {
 			if (value < this.fromEndPoint.getValue()) {
 				return false;
@@ -30,6 +34,10 @@ public class Interval {
 				return false;
 			}
 		}
+		return true;
+	}
+
+	private boolean untilEndPointOnRight(double value) {
 		if (this.untilEndPoint.isClosed()) {
 			if (value > this.untilEndPoint.getValue()) {
 				return false;
