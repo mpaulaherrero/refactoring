@@ -102,6 +102,12 @@ class PlayerStatistics {
 }
 
 package analyzers {
+    abstract Analyzer {
+        # nextAnalyzer: Analyzer
+        + Analyzer(Analyzer nextAnalyzer)
+        {abstract} + getGamble(PlayerStatistics playerStatistics): Gamble
+    }
+
     class GambleAnalyzer {
         - dobleParejaAnalyzer: DobleParejaAnalyzer
         - parejaAnalyzer: ParejaAnalyzer
@@ -111,22 +117,26 @@ package analyzers {
     }
 
     class CartaAltaAnalyzer {
-    + getGamble(PlayerStatistics playerStatistics): Gamble
+        + CartaAltaAnalyzer()
+        + CartaAltaAnalyzer(Analyzer analyzer)
+        + getGamble(PlayerStatistics playerStatistics): Gamble
     }
     class ParejaAnalyzer {
-    + getGamble(PlayerStatistics playerStatistics): Gamble
+        + ParejaAnalyzer(Analyzer analyzer)
+        + getGamble(PlayerStatistics playerStatistics): Gamble
     }
     class DobleParejaAnalyzer {
-    + getGamble(PlayerStatistics playerStatistics): Gamble
+        + DobleParejaAnalyzer(Analyzer analyzer)
+        + getGamble(PlayerStatistics playerStatistics): Gamble
     }
 }
 
 Deck *-d- "*" Card
 
 Player *-d- "*" Card
-Player -r-> Gamble
-Player *-d- PlayerStatistics
-Player *- GambleAnalyzer
+Player *-d--- GambleAnalyzer
+Player -r---> Gamble
+Player *-d--- PlayerStatistics
 
 PlayerStatistics -d-> "*" Card
 PlayerStatistics *-d- "*" Value
@@ -137,23 +147,22 @@ Gamble -d-> "*" Value
 Card -d-> Value
 Card -d-> Suite
 
-GambleAnalyzer -> Gamble
-GambleAnalyzer -> PlayerStatistics
-GambleAnalyzer *-d- CartaAltaAnalyzer
-GambleAnalyzer *-d- DobleParejaAnalyzer
-GambleAnalyzer *-d- ParejaAnalyzer
+GambleAnalyzer *-d-> Analyzer
+GambleAnalyzer -d-> Gamble
+GambleAnalyzer -d-> PlayerStatistics
 
-CartaAltaAnalyzer -d-> PlayerStatistics
-CartaAltaAnalyzer *-d- Gamble
+Analyzer <|-down- ParejaAnalyzer
+Analyzer <|-down- DobleParejaAnalyzer
+Analyzer <|-down- CartaAltaAnalyzer
+
+Analyzer -r-> Gamble
+Analyzer -r-> PlayerStatistics
+
 CartaAltaAnalyzer -d-> GambleType
 
-DobleParejaAnalyzer -d-> PlayerStatistics
-DobleParejaAnalyzer *-d- Gamble
 DobleParejaAnalyzer -d-> GambleType
 DobleParejaAnalyzer -d-> "*" Value
 
-ParejaAnalyzer -d-> PlayerStatistics
-ParejaAnalyzer *-d- Gamble
 ParejaAnalyzer -d-> GambleType
 ParejaAnalyzer -d-> "*" Value
 

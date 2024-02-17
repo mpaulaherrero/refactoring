@@ -5,29 +5,24 @@ import edu.ucv.poker.PlayerStatistics;
 
 public class GambleAnalyzer {
 
-	private DobleParejaAnalyzer dobleParejaAnalyzer;
+	private Analyzer analyzer;
 
-	private ParejaAnalyzer parejaAnalyzer;
-
-	private CartaAltaAnalyzer cartaAltaAnalyzer;
-	
 	public GambleAnalyzer() {
-		dobleParejaAnalyzer = new DobleParejaAnalyzer();
-		parejaAnalyzer = new ParejaAnalyzer();
-		cartaAltaAnalyzer = new CartaAltaAnalyzer();
+		analyzer = 
+//				new EscaleraRealAnalyzer(
+//				new EscaleraColorAnalyzer(
+//				new PoquerAnalyzer(
+//				new FullAnalyzer(
+//				new ColorAnalyzer(
+//				new EscaleraAnalyzer(
+//				new TrioAnalyzer(
+				new DobleParejaAnalyzer(
+				new ParejaAnalyzer(
+				new CartaAltaAnalyzer()))/*)))))))*/;
 	}
 
 	public Gamble getGamble(PlayerStatistics playerStatistics) {
-		Gamble gamble;
-		gamble = dobleParejaAnalyzer.getGamble(playerStatistics);
-		if (gamble != null) {
-			return gamble;
-		}
-		gamble = parejaAnalyzer.getGamble(playerStatistics);
-		if (gamble != null) {
-			return gamble;
-		}
-		return cartaAltaAnalyzer.getGamble(playerStatistics);
+		return analyzer.getGamble(playerStatistics);
 	}
 
 }
